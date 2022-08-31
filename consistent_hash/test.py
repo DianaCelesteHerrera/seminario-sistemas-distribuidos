@@ -38,43 +38,56 @@ def run(words):
   to the store, the selected hash scheme is used to determine where to place
   the records.
   """
-  my_hash = CHash()
-  my_store = Store(my_hash)
+  my_hash_c = CHash()
+  my_hash_mod = ModHash()
+  my_store_c = Store(my_hash_c)
+  my_store_mod = Store(my_hash_mod)
   
   
   """
   Add three nodes to the Store
   """
-  my_store.add_node("Node 1")
-  my_store.add_node("Node 2")
-  my_store.add_node("Node 3")
+  my_store_c.add_node("Node 1")
+  my_store_c.add_node("Node 2")
+  my_store_c.add_node("Node 3")
   
-  my_store.dump()
+  my_store_mod.add_node("Node 1")
+  my_store_mod.add_node("Node 2")
+  my_store_mod.add_node("Node 3")
+  
+  my_store_c.dump()
+  my_store_mod.dump()
   
 
   """
   Save all words in the Store
   """
   for word in words:
-      my_store.add_resource(word)
+      my_store_c.add_resource(word)
+      my_store_mod.add_resource(word)
   
-  my_store.dump()
+  my_store_c.dump()
+  my_store_mod.dump()
 
 
   """
   Remove one node from the Store. Stored objects need to be migrated to the
   remaining nodes.
   """
-  my_store.remove_node("Node 1")
-  my_store.dump()
+  my_store_c.remove_node("Node 1")
+  my_store_c.dump()
+  my_store_mod.remove_node("Node 1")
+  my_store_mod.dump()
 
 
   """
   Add the node back to the Store. Objects need to be migrated to conform to the
   Hash scheme.
   """
-  my_store.add_node("Node 1")
-  my_store.dump()
+  my_store_c.add_node("Node 1")
+  my_store_c.dump()
+  my_store_mod.add_node("Node 1")
+  my_store_mod.dump()
 
 
 
